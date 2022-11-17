@@ -14,6 +14,7 @@ const StyledSign = styled.div`
         font-size: 15px;
         color: #FFFFFF;
         margin-top: 32px;
+        text-decoration: none;
     }
     p{
         color: red;

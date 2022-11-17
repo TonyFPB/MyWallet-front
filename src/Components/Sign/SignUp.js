@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { StyledFormSign, StyledSign, Tittle } from "./StyledSign"
 import axios from "axios"
+import { Link } from "react-router-dom"
+
 export default function SignUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -18,6 +20,10 @@ export default function SignUp() {
             request.then(res => {
                 alert(res.data)
                 setError("")
+                setName("")
+                setEmail("")
+                setPassword("")
+                setPasswordConfirm("")
             })
             request.catch(err=>{console.log(err.response);setError("Preencha os dados corretamentes")})
         }else{
@@ -54,7 +60,7 @@ export default function SignUp() {
                     required
                 />
                 <input
-                    placeholder="Cnfirme a senha"
+                    placeholder="Confirme a senha"
                     value={passwordConfirm}
                     id="passwordConfirm"
                     type="password"
@@ -64,7 +70,7 @@ export default function SignUp() {
                 <button>Cadastrar</button>
             </StyledFormSign>
             <p>{error}</p>
-            <a>Já tem uma conta? Entre agora!</a>
+            <Link to="/">Já tem uma conta? Entre agora!</Link>
         </StyledSign>
     )
 }
