@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { StyledFormSign, StyledSign, Tittle } from "./StyledSign"
+import { StyledFormSign, StyledSign, Tittle } from "./StylesSign"
 import axios from "axios"
 import { Link } from "react-router-dom"
 

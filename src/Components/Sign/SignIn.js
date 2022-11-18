@@ -2,7 +2,8 @@ import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuthProvider } from "../../Providers/AuthProvider"
-import { StyledFormSign, StyledSign, Tittle } from "./StyledSign"
+import { StyledFormSign, StyledSign, Tittle } from "./StylesSign"
+
 export default function SignIn() {
     const { setToken } = useAuthProvider()
     const [email, setEmail] = useState("")
@@ -21,7 +22,6 @@ export default function SignIn() {
             request.catch(err=>{console.log(err.response);setError("Email ou senha incorretos!")})
         }
     }
-
 
     return (
         <StyledSign>
