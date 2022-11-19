@@ -9,6 +9,7 @@ export const StyledTransaction = styled.li`
     span{
         font-weight: 400;
         color: #C6C6C6;
+        margin-right: 10px;
     }
 `
 export const Value = styled.p`

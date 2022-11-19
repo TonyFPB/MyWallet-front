@@ -7,12 +7,14 @@ import { useOperationTypeProvider } from '../../Providers/OperationTypeProvider.
 import { useEffect, useState } from 'react';
 import { useAuthProvider } from '../../Providers/AuthProvider.js';
 import axios from 'axios';
+import { useUserProvider } from '../../Providers/UserProvider.js';
 
 export default function Transactions() {
     const [userTransactions, setUserTransactions] = useState([])
     const [userTotal, setUserTotal] = useState(0)
     const { setType } = useOperationTypeProvider()
     const { token } = useAuthProvider()
+    const {nameUser} = useUserProvider()
     const navigate = useNavigate()
     console.log(userTransactions)
 
@@ -36,7 +38,7 @@ export default function Transactions() {
                         newTotal += t.value
 
                     } else {
-                        newTotal -=t.value
+                        newTotal -= t.value
 
                     }
 
@@ -49,7 +51,7 @@ export default function Transactions() {
     return (
         <StyledTransactions>
             <Header>
-                <p>Ola, Fulano</p>
+                <p>Ola, {nameUser}</p>
                 <IoExitOutline size={'30px'} color={"#FFFFFF"} />
             </Header>
             <StyledTransactionsInfos>
@@ -58,9 +60,11 @@ export default function Transactions() {
                         key={t._id}
                         value={t.value}
                         description={t.description}
-                        type={t.type} />
+                        type={t.type}
+                        date={t.date}
+                    />
                 )}
-                <Total pColor={userTotal}><p>SALDO</p><span>{userTotal.toFixed(2).replace(".",',')}</span></Total>
+                <Total pColor={userTotal}><p>SALDO</p><span>{userTotal.toFixed(2).replace(".", ',')}</span></Total>
             </StyledTransactionsInfos>
             <Buttons>
                 <div onClick={() => nextPage("deposit")}><AiOutlinePlusCircle size={"30px"} /><p>Nova entrada</p></div>

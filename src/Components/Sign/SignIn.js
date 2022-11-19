@@ -2,10 +2,12 @@ import axios from "axios"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuthProvider } from "../../Providers/AuthProvider"
+import { useUserProvider } from "../../Providers/UserProvider"
 import { StyledFormSign, StyledSign, Tittle } from "./StylesSign"
 
 export default function SignIn() {
     const { setToken } = useAuthProvider()
+    const {setNameUser} =useUserProvider()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
@@ -18,7 +20,7 @@ export default function SignIn() {
             const URL = "http://localhost:5000/sign-in"
             const body = { email, password }
             const request = axios.post(URL, body)
-            request.then(res => {setToken(res.data.token); setError(''); navigate("/transacoes")})
+            request.then(res => {setToken(res.data.token);setNameUser(res.data.user) ;setError(''); navigate("/transacoes")})
             request.catch(err=>{console.log(err.response);setError("Email ou senha incorretos!")})
         }
     }
