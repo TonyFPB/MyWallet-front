@@ -79,23 +79,27 @@ export default function Transactions() {
             </Header>
             {
                 userTransactions.length !== 0 ?
-                    <StyledTransactionsInfos>
-                        {userTransactions.map(t =>
-                            <Transaction
-                                key={t._id}
-                                value={t.value}
-                                description={t.description}
-                                type={t.type}
-                                date={t.date}
-                            />
-                        )}
+                    <>
+                        <StyledTransactionsInfos>
+                            {userTransactions.map(t =>
+                                <Transaction
+                                    key={t._id}
+                                    value={t.value}
+                                    description={t.description}
+                                    type={t.type}
+                                    date={t.date}
+                                />
+                            )}
+
+                        </StyledTransactionsInfos>
                         <Total pColor={userTotal}><p>SALDO</p><span>{userTotal.toFixed(2).replace(".", ',')}</span></Total>
-                    </StyledTransactionsInfos>
+                    </>
                     :
                     <StyledTransactionsInfos>
                         <EmptyTransactions>Não há registros de entrada ou saída</EmptyTransactions>
                     </StyledTransactionsInfos>
             }
+
             <Buttons>
                 <div onClick={() => nextPage("deposit")}><AiOutlinePlusCircle size={"30px"} /><p>Nova entrada</p></div>
                 <div onClick={() => nextPage("withdraw")}><AiOutlineMinusCircle size={"30px"} /><p>Nova saída</p></div>

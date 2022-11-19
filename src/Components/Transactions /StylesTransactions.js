@@ -34,9 +34,9 @@ export const StyledTransactionsInfos = styled.ul`
     flex-direction: column;
     width: 100%;
     height: 446px;
-    margin: 26px 0px 13px 0px;
+    margin: 26px 0px 0px 0px;
     background: #FFFFFF;
-    border-radius: 5px;
+    border-radius:5px 5px 0 0;
     overflow-y: scroll;
 `
 export const Buttons = styled.div`
@@ -77,9 +77,8 @@ export const Total = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    margin: 0 0 13px 0;
+    border-radius: 0 0 5px 5px;
     width: 100%;
     padding: 0 10px;
     height: 25px;
