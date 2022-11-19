@@ -18,6 +18,12 @@ export const StyledOperation = styled.div`
         justify-content: space-between;
         width: 100%;
         margin: 0 0 40px 0;
+        a{
+            text-decoration: none;
+            font-weight:700;
+            font-size: 26px;
+            color:#000000;
+        }
     }
 `
 export const StyledFormOperation = styled.form`

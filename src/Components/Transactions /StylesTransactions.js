@@ -12,16 +12,26 @@ export const Header = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
     p{
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 700;
         font-size: 26px;
         color:#FFFFFF;
+    }
+    h1{
+        margin: auto;
+        font-size: 26px;
+        color:#000000
+    }
+    a{
+        text-decoration: none;
     }
 `
 export const StyledTransactionsInfos = styled.ul`
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 446px;
     margin: 26px 0px 13px 0px;
@@ -56,8 +66,14 @@ export const Buttons = styled.div`
         }
     }
 `
+export const EmptyTransactions = styled.h1`
+    margin: auto;
+    font-weight: 400;
+    font-size: 20px;
+    color: #868686;
+`
 
-export const Total =styled.div`
+export const Total = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,7 +86,7 @@ export const Total =styled.div`
     background-color: #FFFFFF;
     font-size: 17px;
     span{
-        color:${props=>props.pColor>0?"green":"red"}
+        color:${props => props.pColor > 0 ? "green" : "red"}
     }
     p{
         font-weight: 700;

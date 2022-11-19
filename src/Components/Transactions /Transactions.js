@@ -1,26 +1,35 @@
-import { StyledTransactions, Header, StyledTransactionsInfos, Buttons, Total } from './StylesTransactions.js';
+import { StyledTransactions, Header, StyledTransactionsInfos, EmptyTransactions, Buttons, Total } from './StylesTransactions.js';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { IoExitOutline } from "react-icons/io5"
 import Transaction from './Transaction.js';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { useOperationTypeProvider } from '../../Providers/OperationTypeProvider.js';
 import { useEffect, useState } from 'react';
 import { useAuthProvider } from '../../Providers/AuthProvider.js';
-import axios from 'axios';
 import { useUserProvider } from '../../Providers/UserProvider.js';
+import axios from 'axios';
 
 export default function Transactions() {
     const [userTransactions, setUserTransactions] = useState([])
     const [userTotal, setUserTotal] = useState(0)
     const { setType } = useOperationTypeProvider()
-    const { token } = useAuthProvider()
-    const {nameUser} = useUserProvider()
+    const { token, setToken } = useAuthProvider()
+    const { nameUser, setNameUser } = useUserProvider()
     const navigate = useNavigate()
-    console.log(userTransactions)
 
     function nextPage(operationType) {
         setType(operationType)
         navigate("/entrada")
+    }
+    function logginOut() {
+        const confirm = window.confirm("Tem cereteza que deseja sair?")
+        if (confirm) {
+            setToken('')
+            setNameUser('Fulano')
+            setUserTransactions([])
+            setUserTotal(0)
+            navigate('/')
+        }
     }
     useEffect(() => {
         const URL = "http://localhost:5000/transactions"
@@ -47,25 +56,46 @@ export default function Transactions() {
             })
             .catch(err => console.log(err.response))
     }, [])
+    if (token === '') {
+        return (
+            <StyledTransactions>
+
+                <Header>
+                    <Link to="/">
+                        <h1>Voce nao esta mais logado, voltar para a pagina de login?</h1>
+                    </Link>
+                </Header>
+
+
+            </StyledTransactions>
+        )
+    }
 
     return (
         <StyledTransactions>
             <Header>
                 <p>Ola, {nameUser}</p>
-                <IoExitOutline size={'30px'} color={"#FFFFFF"} />
+                <IoExitOutline onClick={logginOut} size={'30px'} color={"#FFFFFF"} />
             </Header>
-            <StyledTransactionsInfos>
-                {userTransactions && userTransactions.map(t =>
-                    <Transaction
-                        key={t._id}
-                        value={t.value}
-                        description={t.description}
-                        type={t.type}
-                        date={t.date}
-                    />
-                )}
-                <Total pColor={userTotal}><p>SALDO</p><span>{userTotal.toFixed(2).replace(".", ',')}</span></Total>
-            </StyledTransactionsInfos>
+            {
+                userTransactions.length !== 0 ?
+                    <StyledTransactionsInfos>
+                        {userTransactions.map(t =>
+                            <Transaction
+                                key={t._id}
+                                value={t.value}
+                                description={t.description}
+                                type={t.type}
+                                date={t.date}
+                            />
+                        )}
+                        <Total pColor={userTotal}><p>SALDO</p><span>{userTotal.toFixed(2).replace(".", ',')}</span></Total>
+                    </StyledTransactionsInfos>
+                    :
+                    <StyledTransactionsInfos>
+                        <EmptyTransactions>Não há registros de entrada ou saída</EmptyTransactions>
+                    </StyledTransactionsInfos>
+            }
             <Buttons>
                 <div onClick={() => nextPage("deposit")}><AiOutlinePlusCircle size={"30px"} /><p>Nova entrada</p></div>
                 <div onClick={() => nextPage("withdraw")}><AiOutlineMinusCircle size={"30px"} /><p>Nova saída</p></div>

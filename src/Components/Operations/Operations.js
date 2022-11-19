@@ -1,7 +1,7 @@
 import { useOperationTypeProvider } from "../../Providers/OperationTypeProvider.js"
 import { StyledOperation, StyledFormOperation } from "./StylesOperations.js"
 import { IoExitOutline } from "react-icons/io5"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuthProvider } from "../../Providers/AuthProvider.js"
 import { useState } from "react"
 import axios from "axios"
@@ -9,6 +9,7 @@ import axios from "axios"
 export default function Operations() {
     const [value, setValue] = useState('')
     const [description, setDescription] = useState('')
+    const navigate=useNavigate()
     const { type } = useOperationTypeProvider()
     const { token } = useAuthProvider()
     function sendingOperation(e) {
@@ -25,18 +26,29 @@ export default function Operations() {
         }
         const URL = "http://localhost:5000/transactions"
         axios.post(URL, body, config)
-            .then(res => { alert(res.data); console.log(res) })
+            .then(res => { alert(res.data); console.log(res); navigate("/transacoes") })
             .catch(err => console.log(err))
 
     }
+    if (token === "") {
+        return (
+            <StyledOperation>
+                <div>
+                    <Link to="/">
+                        Voce nao esta mais logado, voltar para a pagina de login?
+                    </Link>
+                </div>
+            </StyledOperation>
+        )
+    }
     return (
-        <StyledOperation onSubmit={sendingOperation}>
+        <StyledOperation >
             <div>
                 <h1>{type === "deposit" ? "Nova entrada" : "Nova Saida"}</h1>
                 <Link to="/transacoes"><IoExitOutline size={"30px"} color={"#FFFFFF"} /></Link>
             </div>
 
-            <StyledFormOperation>
+            <StyledFormOperation onSubmit={sendingOperation}>
                 <input
                     id="value"
                     value={value}
