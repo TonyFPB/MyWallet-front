@@ -5,6 +5,8 @@ export const StyledTransactions = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 20px 25px;
+    font-family: 'Raleway';
+    font-style: normal; 
 `
 export const Header = styled.div`
     width: 100%;
@@ -18,12 +20,14 @@ export const Header = styled.div`
         color:#FFFFFF;
     }
 `
-export const StyledTransactionsInfos = styled.div`
+export const StyledTransactionsInfos = styled.ul`
+    position: relative;
     width: 100%;
     height: 446px;
     margin: 26px 0px 13px 0px;
     background: #FFFFFF;
     border-radius: 5px;
+    overflow-y: scroll;
 `
 export const Buttons = styled.div`
     display: flex;
@@ -51,4 +55,25 @@ export const Buttons = styled.div`
             word-wrap: break-word;
         }
     }
+`
+
+export const Total =styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 10px;
+    height: 25px;
+    background-color: #FFFFFF;
+    font-size: 17px;
+    span{
+        color:${props=>props.pColor>0?"green":"red"}
+    }
+    p{
+        font-weight: 700;
+    }
+      
 `
