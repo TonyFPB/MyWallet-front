@@ -21,8 +21,7 @@ function App() {
               <Route path="/" element={<SignIn />} />
               <Route path="/cadastro" element={<SignUp />} />
               <Route path="/transacoes" element={<Transactions />} />
-              <Route path="entrada" element={<Operations />} />
-              {/* <Route path="/saida"></Route> */}
+              <Route path="/operacao" element={<Operations />} />
             </Routes>
           </BrowserRouter>
         </OperationTypeProvider>

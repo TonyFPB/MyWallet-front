@@ -12,7 +12,7 @@ export default function SignUp() {
 
     function registering(e) {
         e.preventDefault()
-        const URL = "http://localhost:5000/sign-up"
+        const URL = "https://mywallet-api-msb8.onrender.com/sign-up"
 
         if (password === passwordConfirm) {
             const body = { name, email, password }
@@ -25,7 +25,7 @@ export default function SignUp() {
                 setPassword("")
                 setPasswordConfirm("")
             })
-            request.catch(err=>{console.log(err.response);setError("Preencha os dados corretamentes")})
+            request.catch(err=>{setError("Preencha os dados corretamentes")})
         }else{
             setError("Senha incorreta")
         }
@@ -38,6 +38,7 @@ export default function SignUp() {
                 <input
                     placeholder="Nome"
                     value={name}
+                    min={3}
                     id="name"
                     type="text"
                     onChange={(e) => setName(e.target.value)}
@@ -54,6 +55,7 @@ export default function SignUp() {
                 <input
                     placeholder="Senha"
                     value={password}
+                    min={6}
                     id="password"
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}

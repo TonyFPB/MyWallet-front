@@ -17,11 +17,11 @@ export default function SignIn() {
         e.preventDefault()
 
         if (email !== "" && password !== "") {
-            const URL = "http://localhost:5000/sign-in"
+            const URL = "https://mywallet-api-msb8.onrender.com/sign-in"
             const body = { email, password }
             const request = axios.post(URL, body)
             request.then(res => {setToken(res.data.token);setNameUser(res.data.user) ;setError(''); navigate("/transacoes")})
-            request.catch(err=>{console.log(err.response);setError("Email ou senha incorretos!")})
+            request.catch(err=>{setError("Email ou senha incorretos!")})
         }
     }
 

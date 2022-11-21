@@ -43,6 +43,7 @@ export const Buttons = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin: 13px 0 0 0;
 
     div{
         display: flex;
@@ -77,7 +78,7 @@ export const Total = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 13px 0;
+    /* margin: 0 0 13px 0; */
     border-radius: 0 0 5px 5px;
     width: 100%;
     padding: 0 10px;

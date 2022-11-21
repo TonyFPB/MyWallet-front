@@ -19,7 +19,7 @@ export default function Transactions() {
 
     function nextPage(operationType) {
         setType(operationType)
-        navigate("/entrada")
+        navigate("/operacao")
     }
     function logginOut() {
         const confirm = window.confirm("Tem cereteza que deseja sair?")
@@ -32,7 +32,7 @@ export default function Transactions() {
         }
     }
     useEffect(() => {
-        const URL = "http://localhost:5000/transactions"
+        const URL = "https://mywallet-api-msb8.onrender.com/transactions"
         const config = {
             "headers": {
                 "Authorization": `Bearer ${token}`
@@ -54,7 +54,7 @@ export default function Transactions() {
                 })
                 setUserTotal(newTotal)
             })
-            .catch(err => console.log(err.response))
+            .catch(err => console.log(err))
     }, [])
     if (token === '') {
         return (

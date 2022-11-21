@@ -27,7 +27,6 @@ export const StyledOperation = styled.div`
     }
 `
 export const StyledFormOperation = styled.form`
-    /* margin: 0 24px; */
     input{
         width: 100%;
         height: 58px;

@@ -24,9 +24,9 @@ export default function Operations() {
             description,
             type
         }
-        const URL = "http://localhost:5000/transactions"
+        const URL = "https://mywallet-api-msb8.onrender.com/transactions"
         axios.post(URL, body, config)
-            .then(res => { alert(res.data); console.log(res); navigate("/transacoes") })
+            .then(res => { alert(res.data); navigate("/transacoes") })
             .catch(err => console.log(err))
 
     }
